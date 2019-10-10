@@ -12,6 +12,6 @@ RUN ln -s /usr/bin/genisoimage /usr/local/bin/mkisofs
 RUN cd /tmp/ && git clone https://github.com/AmigaPorts/lha.git && cd lha && autoreconf -is && ./configure && make && make check && make install
 
 # Install xdftool
-RUN sudo pip install amitools
+RUN pip install amitools
 
 WORKDIR /work
