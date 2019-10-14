@@ -47,7 +47,8 @@ RUN dpkg --add-architecture i386 && \
         libswitch-perl \
         libasound2-dev \
         libc6:i386 \
-        libstdc++6:i386
+        libstdc++6:i386 \
+        libsdl1.2-dev
 
 RUN git config --global user.email "you@example.com" && \
         git config --global user.name "Your Name"
