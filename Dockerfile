@@ -50,6 +50,10 @@ RUN dpkg --add-architecture i386 && \
         libstdc++6:i386 \
         libsdl1.2-dev
 
+RUN rm -rf /var/lib/apt/lists/*
+
+RUN apt clean
+
 RUN git config --global user.email "you@example.com" && \
         git config --global user.name "Your Name"
 
@@ -58,7 +62,7 @@ RUN echo "root:root" | chpasswd
 RUN ln -s /usr/bin/genisoimage /usr/local/bin/mkisofs
 
 # Install proper LHA
-RUN cd /tmp/ && git clone https://github.com/AmigaPorts/lha.git && cd lha && autoreconf -is && ./configure && make && make check && make install
+RUN cd /tmp/ && git clone https://github.com/AmigaPorts/lha.git && cd lha && autoreconf -is && ./configure && make && make check && make install && cd / && rm -rf /tmp/lha
 
 # Install xdftool
 RUN pip install amitools
