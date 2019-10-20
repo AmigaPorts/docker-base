@@ -4,18 +4,18 @@ FROM alpine:3.10
 MAINTAINER Marlon Beijer "marlon@amigadev.com"
 
 RUN apk update && \
-        apk add \
+	apk add \
 	bash \
 	wget \
-        curl \
-        git \
-        make \
-        automake \
-        autoconf \
-        pkgconfig \
-        unzip \
-        gawk \
-        cmake \
+	curl \
+	git \
+	make \
+	automake \
+	autoconf \
+	pkgconfig \
+	unzip \
+	gawk \
+	cmake \
 	py2-pip \
 	python2-dev \
 	gcc \
