@@ -1,4 +1,4 @@
-FROM ubuntu:19.04
+FROM debian:bullseye-slim
 
 # START COMMON
 MAINTAINER Marlon Beijer "marlon@amigadev.com"
@@ -13,6 +13,7 @@ RUN dpkg --add-architecture i386 && \
         git \
         make \
         automake \
+        nano \
         autoconf \
         pkg-config \
         unzip \
