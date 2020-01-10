@@ -5,7 +5,7 @@ MAINTAINER Marlon Beijer "marlon@amigadev.com"
 
 RUN dpkg --add-architecture i386 && \
         apt update && \
-        apt install -y python-pip \
+        apt install -y python3-pip \
         genisoimage \
         rsync \
         wget \
@@ -66,6 +66,6 @@ RUN ln -s /usr/bin/genisoimage /usr/local/bin/mkisofs
 RUN cd /tmp/ && git clone https://github.com/AmigaPorts/lha.git && cd lha && autoreconf -is && ./configure && make && make check && make install && cd / && rm -rf /tmp/lha
 
 # Install xdftool
-RUN pip install amitools
+RUN pip3 install amitools
 
 WORKDIR /work
