@@ -5,6 +5,7 @@ MAINTAINER Marlon Beijer "marlon@amigadev.com"
 
 RUN dpkg --add-architecture i386 && \
         apt update && \
+        apt upgrade -y && \
         apt install -y python3-pip \
         genisoimage \
         rsync \
@@ -26,7 +27,7 @@ RUN dpkg --add-architecture i386 && \
         gettext \
         texinfo\
         python \
-        python-mako \
+        python3-mako \
         g++ \
         gcc \
         gcc-multilib \
@@ -49,9 +50,10 @@ RUN dpkg --add-architecture i386 && \
         libasound2-dev \
         libc6:i386 \
         libstdc++6:i386 \
-        libsdl1.2-dev
+        libsdl1.2-dev \
+        xutils-dev
 
-RUN rm -rf /var/lib/apt/lists/*
+RUN apt autoremove -y && rm -rf /var/lib/apt/lists/*
 
 RUN apt clean
 
