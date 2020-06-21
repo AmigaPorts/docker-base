@@ -17,6 +17,7 @@ RUN dpkg --add-architecture i386 && \
         nano \
         autoconf \
         pkg-config \
+        zip \
         unzip \
         gawk \
         bison \
