@@ -1,0 +1,11 @@
+{
+    "builds": [
+        {
+            "DockerRoot": "amigadev",
+            "DockerImage": "docker-base",
+            "DockerTag": "latest",
+            "Dockerfile": "Dockerfile",
+            "BuildIfSuccessful": "m68k-amigaos-gcc"
+        }
+    ]
+}
