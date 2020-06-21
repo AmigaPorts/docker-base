@@ -13,6 +13,7 @@ RUN apk update && \
 	automake \
 	autoconf \
 	pkgconfig \
+	zip \
 	unzip \
 	gawk \
 	cmake \
