@@ -1,11 +1,12 @@
-FROM ubuntu:19.04
+FROM debian:bullseye-slim
 
 # START COMMON
 MAINTAINER Marlon Beijer "marlon@amigadev.com"
 
 RUN dpkg --add-architecture i386 && \
         apt update && \
-        apt install -y python-pip \
+        apt upgrade -y && \
+        apt install -y python3-pip \
         genisoimage \
         rsync \
         wget \
@@ -13,8 +14,10 @@ RUN dpkg --add-architecture i386 && \
         git \
         make \
         automake \
+        nano \
         autoconf \
         pkg-config \
+        zip \
         unzip \
         gawk \
         bison \
@@ -25,7 +28,7 @@ RUN dpkg --add-architecture i386 && \
         gettext \
         texinfo\
         python \
-        python-mako \
+        python3-mako \
         g++ \
         gcc \
         gcc-multilib \
@@ -48,7 +51,12 @@ RUN dpkg --add-architecture i386 && \
         libasound2-dev \
         libc6:i386 \
         libstdc++6:i386 \
-        libsdl1.2-dev
+        libsdl1.2-dev \
+        xutils-dev
+
+RUN apt autoremove -y && rm -rf /var/lib/apt/lists/*
+
+RUN apt clean
 
 RUN git config --global user.email "you@example.com" && \
         git config --global user.name "Your Name"
@@ -58,9 +66,9 @@ RUN echo "root:root" | chpasswd
 RUN ln -s /usr/bin/genisoimage /usr/local/bin/mkisofs
 
 # Install proper LHA
-RUN cd /tmp/ && git clone https://github.com/AmigaPorts/lha.git && cd lha && autoreconf -is && ./configure && make && make check && make install
+RUN cd /tmp/ && git clone https://github.com/AmigaPorts/lha.git && cd lha && autoreconf -is && ./configure && make && make check && make install && cd / && rm -rf /tmp/lha
 
 # Install xdftool
-RUN pip install amitools
+RUN pip3 install amitools
 
 WORKDIR /work

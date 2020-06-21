@@ -1,0 +1,39 @@
+FROM alpine:3.10
+
+# START COMMON
+MAINTAINER Marlon Beijer "marlon@amigadev.com"
+
+RUN apk update && \
+	apk add \
+	bash \
+	wget \
+	curl \
+	git \
+	make \
+	automake \
+	autoconf \
+	pkgconfig \
+	zip \
+	unzip \
+	gawk \
+	cmake \
+	py2-pip \
+	python2-dev \
+	gcc \
+	g++
+
+RUN git config --global user.email "you@example.com" && \
+        git config --global user.name "Your Name"
+
+RUN echo "root:root" | chpasswd
+
+# Install proper LHA
+RUN cd /tmp/ && git clone https://github.com/AmigaPorts/lha.git && cd lha && autoreconf -is && ./configure && make && make check && make install && cd / && rm -rf /tmp/lha
+
+# Install xdftool
+RUN pip install amitools
+
+# Purge unneccessary packages
+RUN apk del --purge gcc g++ python2-dev
+
+WORKDIR /work
