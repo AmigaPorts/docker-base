@@ -5,7 +5,11 @@
             "DockerImage": "docker-base",
             "DockerTag": "latest",
             "Dockerfile": "Dockerfile",
-            "BuildIfSuccessful": "m68k-amigaos-gcc"
+            "BuildIfSuccessful": [
+                "adtools",
+                "morphos-cross-toolchain",
+                "m68k-amigaos-gcc"
+            ]
         }
     ]
 }

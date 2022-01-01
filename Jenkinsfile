@@ -66,9 +66,17 @@ def buildStep(DOCKER_ROOT, DOCKERIMAGE, DOCKERTAG, DOCKERFILE, BUILD_NEXT) {
 			}
 		}
 
-		if (!BUILD_NEXT.equals('')) {
-			build "${BUILD_NEXT}/${env.BRANCH_NAME}";
+		def branches = [:]
+
+		BUILD_NEXT.each { v ->
+			branches["Build ${v}"] = { 
+				node {
+					build "${v}/${env.BRANCH_NAME}";
+				}
+			}
 		}
+
+		parallel branches;
 	} catch(err) {
 		slackSend color: "danger", channel: "#jenkins", message: "Build Failed: ${fixed_job_name} #${env.BUILD_NUMBER} Target: ${DOCKER_ROOT}/${DOCKERIMAGE}:${tag} (<${env.BUILD_URL}|Open>)"
 		currentBuild.result = 'FAILURE'
