@@ -70,9 +70,7 @@ def buildStep(DOCKER_ROOT, DOCKERIMAGE, DOCKERTAG, DOCKERFILE, BUILD_NEXT) {
 
 		BUILD_NEXT.each { v ->
 			branches["Build ${v}"] = { 
-				node {
-					build "${v}/${env.BRANCH_NAME}";
-				}
+				build "${v}/${env.BRANCH_NAME}";
 			}
 		}
 
