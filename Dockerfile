@@ -28,6 +28,7 @@ RUN dpkg --add-architecture i386 \
 		gperf \
 		gettext \
 		texinfo\
+		python2 \
 		python3 \
 		python3-mako \
 		g++ \
