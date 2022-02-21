@@ -18,6 +18,7 @@ RUN dpkg --add-architecture i386 \
 		nano \
 		autoconf \
 		pkg-config \
+		bsdmainutils \
 		zip \
 		unzip \
 		gawk \
