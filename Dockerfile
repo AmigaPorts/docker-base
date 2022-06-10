@@ -76,7 +76,7 @@ RUN dpkg --add-architecture i386 \
 	&& cd / \
 	&& rm -rf /tmp/lha \
 	&& pip3 install amitools \
-	&& go install github.com/github-release/github-release
+	&& go install github.com/github-release/github-release@latest
 
 RUN echo "root:root" | chpasswd
 
