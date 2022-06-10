@@ -1,4 +1,4 @@
-FROM debian:bookworm-slim
+FROM debian:unstable-slim
 
 # START COMMON
 MAINTAINER Marlon Beijer "marlon@amigadev.com"
