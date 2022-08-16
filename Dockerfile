@@ -14,6 +14,7 @@ RUN dpkg --add-architecture i386 \
 		curl \
 		git \
 		make \
+		ninja-build \
 		automake \
 		nano \
 		autoconf \
