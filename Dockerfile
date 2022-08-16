@@ -1,4 +1,4 @@
-FROM debian:bookworm-slim
+FROM debian:unstable-slim
 
 # START COMMON
 MAINTAINER Marlon Beijer "marlon@amigadev.com"
@@ -77,7 +77,7 @@ RUN dpkg --add-architecture i386 \
 	&& cd / \
 	&& rm -rf /tmp/lha \
 	&& pip3 install amitools \
-	&& go get github.com/github-release/github-release
+	&& go install github.com/github-release/github-release@latest
 
 RUN echo "root:root" | chpasswd
 
