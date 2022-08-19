@@ -59,6 +59,7 @@ RUN dpkg --add-architecture i386 \
 		xutils-dev \
 		locales \
 		golang \
+		sudo \
 	&& apt autoremove -y \
 	&& apt clean \
 	&& rm -rf /var/lib/apt/lists/* \
@@ -80,6 +81,11 @@ RUN dpkg --add-architecture i386 \
 	&& GOPATH=/usr/local go install github.com/github-release/github-release@latest
 
 RUN echo "root:root" | chpasswd
+RUN useradd -rm -d /home/jenkins -s /bin/bash -g root -G sudo -u 1001 jenkins
+RUN echo 'jenkins:jenkins' | chpasswd
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
+
 
 ENV LANG en_US.utf8
 
