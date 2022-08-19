@@ -10,6 +10,13 @@
                 "morphos-cross-toolchain",
                 "m68k-amigaos-gcc"
             ]
+        },
+        {
+            "DockerRoot": "amigadev",
+            "DockerImage": "crosstools",
+            "DockerTag": "x86_64-linux",
+            "Dockerfile": "Dockerfile",
+            "BuildIfSuccessful": []
         }
     ]
 }
