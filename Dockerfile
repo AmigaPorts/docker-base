@@ -37,6 +37,8 @@ RUN dpkg --add-architecture i386 \
 		gcc \
 		gcc-multilib \
 		g++-multilib \
+		gdb \
+		build-essential \
 		libtool \
 		zlib1g-dev \
 		zlib1g \
