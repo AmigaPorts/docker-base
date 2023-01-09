@@ -7,7 +7,6 @@ RUN dpkg --add-architecture i386 \
 	&& apt update \
 	&& apt upgrade -y \
 	&& apt install -y \
-		python3-pip \
 		genisoimage \
 		rsync \
 		wget \
@@ -30,9 +29,9 @@ RUN dpkg --add-architecture i386 \
 		gperf \
 		gettext \
 		texinfo\
-		python2 \
 		python3 \
 		python3-mako \
+		python3-pip \
 		g++ \
 		gcc \
 		gcc-multilib \
