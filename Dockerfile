@@ -78,7 +78,8 @@ RUN dpkg --add-architecture i386 \
 	&& make install \
 	&& cd / \
 	&& rm -rf /tmp/lha \
-	&& pip3 install amitools \
+	&& pip3 install cython \
+	&& pip3 install -U git+https://github.com/cnvogelg/amitools.git \
 	&& GOPATH=/usr/local go install github.com/github-release/github-release@latest
 
 RUN echo "root:root" | chpasswd
