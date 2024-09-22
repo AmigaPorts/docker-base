@@ -17,6 +17,13 @@
             "DockerTag": "x86_64-linux",
             "Dockerfile": "Dockerfile",
             "BuildIfSuccessful": []
+        },
+        {
+            "DockerRoot": "amigadev",
+            "DockerImage": "crosstools",
+            "DockerTag": "x86_64-linux-stable",
+            "Dockerfile": "Dockerfile-stable",
+            "BuildIfSuccessful": []
         }
     ]
 }

@@ -3,6 +3,8 @@ FROM debian:unstable-slim
 # START COMMON
 MAINTAINER Marlon Beijer "marlon@amigadev.com"
 
+COPY deps /tmp/deps
+
 RUN apt update \
 	&& apt upgrade -y \
 	&& apt install -y \
@@ -63,20 +65,11 @@ RUN apt update \
 	&& git config --global user.email "you@example.com" \
 	&& git config --global user.name "Your Name" \
 	&& ln -s /usr/bin/genisoimage /usr/local/bin/mkisofs \
-	&& cd /tmp/ \
-	&& git clone https://github.com/AmigaPorts/lha.git \
-	&& cd lha \
-	&& autoreconf -is \
-	&& ./configure \
-	&& make \
-	&& make check \
-	&& make install \
-	&& cd /tmp/ \
-	&& git clone --recursive https://github.com/AmigaPorts/ilbmtoicon.git \
-	&& cmake -Silbmtoicon -Bilbmtoicon/build \
-	&& cmake --build ilbmtoicon/build --target install \ 
+	&& /tmp/deps/lha \
+	&& /tmp/deps/ilbmtoicon \
+	&& /tmp/deps/flexcat \
+	&& rm -rf /tmp/deps \
 	&& cd / \
-	&& rm -rf /tmp/lha \
 	&& pip3 install --break-system-packages cython \
 	&& pip3 install --break-system-packages -U git+https://github.com/cnvogelg/amitools.git \
 	&& GOPATH=/usr/local go install github.com/github-release/github-release@latest
