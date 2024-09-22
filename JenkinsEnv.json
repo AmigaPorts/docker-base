@@ -5,6 +5,10 @@
             "DockerImage": "docker-base",
             "DockerTag": "latest",
             "Dockerfile": "Dockerfile",
+            "Platforms": [
+                "amd64",
+                "arm64"
+            ],
             "BuildIfSuccessful": [
                 "adtools",
                 "morphos-cross-toolchain",
@@ -16,6 +20,9 @@
             "DockerImage": "crosstools",
             "DockerTag": "x86_64-linux",
             "Dockerfile": "Dockerfile",
+            "Platforms": [
+                "amd64"
+            ],
             "BuildIfSuccessful": []
         },
         {
@@ -23,6 +30,9 @@
             "DockerImage": "crosstools",
             "DockerTag": "x86_64-linux-stable",
             "Dockerfile": "Dockerfile-stable",
+            "Platforms": [
+                "amd64"
+            ],
             "BuildIfSuccessful": []
         }
     ]

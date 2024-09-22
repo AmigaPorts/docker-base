@@ -73,7 +73,7 @@ def buildStep(DOCKER_ROOT, DOCKERIMAGE, DOCKERTAG, DOCKERFILE, BUILD_NEXT) {
 	}
 }
 
-def buildManifest(DOCKER_ROOT, DOCKERIMAGE, DOCKERTAG, DOCKERFILE, BUILD_NEXT) {
+def buildManifest(DOCKER_ROOT, DOCKERIMAGE, DOCKERTAG, DOCKERFILE, PLATFORMS, BUILD_NEXT) {
 	def fixed_job_name = env.JOB_NAME.replace('%2F','/')
 	try {
 		checkout scm;
@@ -93,9 +93,13 @@ def buildManifest(DOCKER_ROOT, DOCKERIMAGE, DOCKERTAG, DOCKERFILE, BUILD_NEXT) {
 		docker.withRegistry("https://index.docker.io/v1/", "dockerhub") {
 			stage("Building ${DOCKERIMAGE}:${tag} manifest...") {
 				sh('docker version');
-				sh("docker pull ${DOCKER_ROOT}/${DOCKERIMAGE}:${tag}_amd64");
-				sh("docker pull ${DOCKER_ROOT}/${DOCKERIMAGE}:${tag}_arm64");
-				sh("docker manifest create ${DOCKER_ROOT}/${DOCKERIMAGE}:${tag} ${DOCKER_ROOT}/${DOCKERIMAGE}:${tag}_amd64 ${DOCKER_ROOT}/${DOCKERIMAGE}:${tag}_arm64");
+				def platformsString = "";
+				PLATFORMS.each { p ->
+					sh("docker pull ${DOCKER_ROOT}/${DOCKERIMAGE}:${tag}_${p}");
+					platformsString = "${platformsString} ${DOCKER_ROOT}/${DOCKERIMAGE}:${tag}_${p}"
+				}
+				
+				sh("docker manifest create ${DOCKER_ROOT}/${DOCKERIMAGE}:${tag} ${platformsString}");
 				sh("docker manifest push ${DOCKER_ROOT}/${DOCKERIMAGE}:${tag}");
 			}
 		}
@@ -124,26 +128,28 @@ node('master') {
 	
 	checkout scm;
 
-	def branches = [:]
+	def branches = [:];
 	def project = readJSON file: "JenkinsEnv.json";
 
 	project.builds.each { v ->
 		branches["Build ${v.DockerRoot}/${v.DockerImage}:${v.DockerTag}"] = {
-			stage('Build amd64 version') {
-				node('amd64') {
-					buildStep(v.DockerRoot, v.DockerImage, "${v.DockerTag}_amd64", v.Dockerfile, [])
-				}
-			}
+			def platforms = [:];
 
-			stage('Build arm64 version') {
-				node('arm64') {
-					buildStep(v.DockerRoot, v.DockerImage, "${v.DockerTag}_arm64", v.Dockerfile, [])
+			v.Platforms.each { p -> 
+				platforms["Build ${v.DockerRoot}/${v.DockerImage}:${v.DockerTag}_${p}"] = {
+					stage("Build ${p} version") {
+						node(p) {
+							buildStep(v.DockerRoot, v.DockerImage, "${v.DockerTag}_${p}", v.Dockerfile, [])
+						}
+					}
 				}
-			}
+			};
+
+			parallel platforms;
 
 			stage('Build multi-arch manifest') {
 				node() {
-					buildManifest(v.DockerRoot, v.DockerImage, v.DockerTag, v.Dockerfile, v.BuildIfSuccessful)
+					buildManifest(v.DockerRoot, v.DockerImage, v.DockerTag, v.Dockerfile, v.Platforms, v.BuildIfSuccessful)
 				}
 			}
 		}
