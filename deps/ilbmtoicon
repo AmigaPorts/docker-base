@@ -1,0 +1,6 @@
+#!/bin/bash
+cd /tmp/ \
+	&& git clone --recursive https://github.com/AmigaPorts/ilbmtoicon.git \
+	&& cmake -Silbmtoicon -Bilbmtoicon/build \
+	&& cmake --build ilbmtoicon/build --target install \
+	&& rm -rf /tmp/ilbmtoicon

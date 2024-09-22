@@ -1,0 +1,10 @@
+#!/bin/bash
+cd /tmp/ \
+	&& git clone https://github.com/AmigaPorts/lha.git \
+	&& cd lha \
+	&& autoreconf -is \
+	&& ./configure \
+	&& make \
+	&& make check \
+	&& make install \
+	&& rm -rf /tmp/lha

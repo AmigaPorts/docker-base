@@ -1,0 +1,7 @@
+#!/bin/bash
+cd /tmp/ \
+	&& git clone --recursive https://github.com/AmigaPorts/flexcat.git \
+	&& cd /tmp/flexcat \
+	&& make \
+	&& mv -fv src/bin_*/flexcat /usr/local/bin/ \
+	&& rm -rf /tmp/flexcat
