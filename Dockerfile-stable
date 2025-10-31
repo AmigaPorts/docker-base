@@ -1,7 +1,9 @@
 FROM debian:stable-slim
 
 # START COMMON
-MAINTAINER Marlon Beijer "marlon@amigadev.com"
+LABEL maintainer="Marlon Beijer <marlon@amigadev.com>" \
+      version="1.0" \
+      description="Base image built on Debian unstable-slim"
 
 COPY deps /tmp/deps
 
@@ -80,6 +82,6 @@ RUN useradd -rm -d /home/jenkins -s /bin/bash -g root -G sudo -u 1001 jenkins
 RUN echo 'jenkins:jenkins' | chpasswd
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-ENV LANG en_US.utf8
+ENV LANG=en_US.utf8
 
 WORKDIR /work

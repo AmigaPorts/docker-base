@@ -1,0 +1,9 @@
+#!/bin/bash
+cd /tmp/ \
+	&& mkdir rust \
+	&& cd rust \
+	&& wget https://sh.rustup.rs -O rust.sh \
+	&& chmod a+x rust.sh \
+	&& ./rust.sh -y \
+	&& cd / \
+	&& rm -rf /tmp/rust
