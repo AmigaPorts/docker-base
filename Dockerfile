@@ -58,6 +58,7 @@ RUN apt update \
 		locales \
 		golang \
 		sudo \
+		xxd \
 	&& apt autoremove -y \
 	&& apt clean \
 	&& rm -rf /var/lib/apt/lists/* \
@@ -68,6 +69,7 @@ RUN apt update \
 	&& /tmp/deps/lha \
 	&& /tmp/deps/ilbmtoicon \
 	&& /tmp/deps/flexcat \
+	&& /tmp/deps/rust \
 	&& rm -rf /tmp/deps \
 	&& cd / \
 	&& pip3 install --break-system-packages cython \
