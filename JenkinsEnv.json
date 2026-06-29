@@ -10,9 +10,9 @@
                 "arm64"
             ],
             "BuildIfSuccessful": [
-                "adtools",
-                "morphos-cross-toolchain",
-                "m68k-amigaos-gcc"
+                "ppc-amigaos",
+                "ppc-morphos",
+                "m68k-amigaos"
             ]
         },
         {
