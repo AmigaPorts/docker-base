@@ -64,9 +64,9 @@ RUN apt update \
 	&& apt autoremove -y \
 	&& apt clean \
 	&& rm -rf /var/lib/apt/lists/* \
-	&& localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8 \
-	&& git config --global user.email "you@example.com" \
-	&& git config --global user.name "Your Name" \
+	&& localedef -i en_US -c -f UTF-8 en_US.UTF-8 \
+	&& git config --global user.email "git@amiga.dev" \
+	&& git config --global user.name "AmigaDev" \
 	&& ln -s /usr/bin/genisoimage /usr/local/bin/mkisofs \
 	&& /tmp/deps/lha \
 	&& /tmp/deps/ilbmtoicon \
