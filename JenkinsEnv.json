@@ -10,9 +10,9 @@
                 "arm64"
             ],
             "BuildIfSuccessful": [
-                "ppc-amigaos",
-                "ppc-morphos",
-                "m68k-amigaos"
+                "AmigaDev/ppc-amigaos",
+                "AmigaDev/ppc-morphos",
+                "AmigaDev/m68k-amigaos"
             ]
         },
         {
