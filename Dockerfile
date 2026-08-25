@@ -75,7 +75,8 @@ RUN apt update \
 	&& rm -rf /tmp/deps \
 	&& cd / \
 	&& pip3 install --break-system-packages cython \
-	&& pip3 install --break-system-packages -U git+https://github.com/AmigaPorts/amitools.git \
+	&& pip3 install --break-system-packages -U "amitools[vamos] @ git+https://github.com/AmigaPorts/amitools.git" \
+	&& for tool in fdtool geotool hunktool rdbtool romtool typetool vamos vamospath vamostool xdfscan xdftool; do command -v "${tool}"; done \
 	&& GOPATH=/usr/local go install github.com/github-release/github-release@latest
 
 RUN echo "root:root" | chpasswd
